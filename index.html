@@ -43,7 +43,7 @@
             <div class="nav-wrapper"></div>
         </nav>
 
-        <div id="movieList" class="collection">
+        <div id="movieList">
             
         </div>
 
@@ -76,7 +76,8 @@
       function displayMovieList(movies){
           let html='';
           for(let movie of movies){
-              html+= `<a href="#movieList" onclick="getTheMovie(${movie.id})" class="collection-item">${movie.title}</a>`
+
+              html+= `<a href="#movieList" onclick="getMovie(${movie.id})" class="collection-item">${movie.title}</a>`
           }
           return document.querySelector('#movieList').innerHTML = html;
       }
@@ -87,8 +88,31 @@
           displayMovieList(movies);
       }
 
-      async function getTheMovie(id){
-          //request movie detail and display it to page
+      function displayMovie(movie){
+          
+          document.querySelector('#movieDetail').innerHTML = `
+            <div class="row">
+                <h1>${movie.title}</h1>
+            </div>
+
+            <div class="card row">
+              <div class="col">
+                  <img src="${movie.poster_url}">
+              </div>
+              <div class="col">
+                  <p> Release Date : ${movie.release_date}</p>
+                  <p> Studio : ${movie.studio} </p>
+                  <p> Gross : ${movie.gross} </p>
+              </div>
+            </div>
+          `;
+
+      }
+
+      async function getMovie(id){
+          const response = await fetch(server+`/api/movies/${id}`, {method:'GET'});
+          const movie = await response.json();
+          displayMovie(movie);
       }
 
 
