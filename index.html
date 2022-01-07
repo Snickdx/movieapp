@@ -28,7 +28,7 @@
 
   </head>
   <body>
-    <nav class="purple">
+    <nav class="green">
       <div class="nav-wrapper">
         
         <a href="/app" class="brand-logo center">Movies App</a>
@@ -39,7 +39,7 @@
     </nav>
 
     <ul id="slide-out"  class="sidenav sidenav-fixed">
-        <nav class="purple">
+        <nav class="green">
             <div class="nav-wrapper"></div>
         </nav>
 
@@ -72,6 +72,24 @@
           var instances = M.Sidenav.init(elems);
           getMovieList();
       });
+
+      function displayMovieList(movies){
+          let html='';
+          for(let movie of movies){
+              html+= `<a href="#movieList" onclick="getTheMovie(${movie.id})" class="collection-item">${movie.title}</a>`
+          }
+          return document.querySelector('#movieList').innerHTML = html;
+      }
+
+      async function getMovieList(){
+          const response = await fetch(server+'/api/movies', {method:'GET'});
+          const movies = await response.json();
+          displayMovieList(movies);
+      }
+
+      async function getTheMovie(id){
+          //request movie detail and display it to page
+      }
 
 
     </script>
