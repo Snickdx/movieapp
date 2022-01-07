@@ -28,7 +28,7 @@
 
   </head>
   <body>
-    <nav class="purple">
+    <nav class="green">
       <div class="nav-wrapper">
         
         <a href="/app" class="brand-logo center">Movies App</a>
@@ -39,7 +39,7 @@
     </nav>
 
     <ul id="slide-out"  class="sidenav sidenav-fixed">
-        <nav class="purple">
+        <nav class="green">
             <div class="nav-wrapper"></div>
         </nav>
 
@@ -76,7 +76,8 @@
       function displayMovieList(movies){
           let html='';
           for(let movie of movies){
-              html+= `<a href="#movieList" onclick="getMovie(${movie.id})" class="collection-item">${movie.title}</a><br>`
+
+              html+= `<a href="#movieList" onclick="getMovie(${movie.id})" class="collection-item">${movie.title}</a>`
           }
           return document.querySelector('#movieList').innerHTML = html;
       }
